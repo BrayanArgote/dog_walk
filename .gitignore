@@ -1,0 +1,26 @@
+# entorno virtual
+venv/
+env/
+
+# bse de datos
+db.sqlite3
+
+# archivos de migraciones compilados
+*/migrations/__pycache__/
+*/__pycache__/
+__pycache__/
+
+# archivos de configuracion locales
+*.pyc
+*.pyo
+
+# archivos de vsc
+.vscode/
+
+# archivos del sistema
+.DS_Store
+Thumbs.db
+
+# credenciales
+*.env
+.env
