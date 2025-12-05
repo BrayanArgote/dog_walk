@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Iniciar Paseo{% endblock %}
+
+{% block contenido %}
+<h1>Iniciar Paseo</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ paseo.ad.pet.name }}</p>
+    <p><strong>Fecha:</strong> {{ paseo.ad.date }}</p>
+    <p><strong>Lugar:</strong> {{ paseo.ad.place }}</p>
+    <p><strong>Duración:</strong> {{ paseo.ad.duration }} minutos</p>
+</div>
+
+<p>¿Estás listo para iniciar el paseo?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #28a745;">Iniciar Paseo</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'mis_paseos' %}">Cancelar</a>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Mis Solicitudes{% endblock %}
+
+{% block contenido %}
+<h1>Mis Solicitudes</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'listar_anuncios_disponibles' %}" style="color: #007bff; text-decoration: none;">
+        Ver anuncios disponibles
+    </a>
+    <a href="{% url 'home' %}" style="margin-left: 10px; color: #007bff; text-decoration: none;">
+        Volver al inicio
+    </a>
+</div>
+
+{% if solicitudes %}
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f8f9fa;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Mascota</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Fecha</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Lugar</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for solicitud in solicitudes %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ solicitud.ad.pet.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ solicitud.ad.date }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ solicitud.ad.place }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if solicitud.status == 'pending' %}
+                        <span style="color: #ffc107;">Pendiente</span>
+                    {% elif solicitud.status == 'accepted' %}
+                        <span style="color: #28a745;">Aceptada</span>
+                    {% else %}
+                        <span style="color: #dc3545;">Rechazada</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="margin-top: 20px; color: #666;">No has enviado solicitudes aún.</p>
+{% endif %}
+{% endblock %}

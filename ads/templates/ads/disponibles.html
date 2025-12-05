@@ -1,0 +1,39 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Anuncios Disponibles{% endblock %}
+
+{% block contenido %}
+<h1>Anuncios Disponibles</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'home' %}" style="color: #007bff; text-decoration: none;">
+        Volver al inicio
+    </a>
+</div>
+
+{% if anuncios %}
+    <div style="display: grid; gap: 20px;">
+        {% for anuncio in anuncios %}
+        <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px; background-color: #f8f9fa;">
+            <h3>{{ anuncio.pet.name }} ({{ anuncio.pet.type }})</h3>
+            <p><strong>Fecha:</strong> {{ anuncio.date }} a las {{ anuncio.time }}</p>
+            <p><strong>Duración:</strong> {{ anuncio.duration }} minutos</p>
+            <p><strong>Lugar:</strong> {{ anuncio.place }}</p>
+            <p><strong>Propietario:</strong> {{ anuncio.pet.owner.first_name }} {{ anuncio.pet.owner.last_name }}</p>
+            
+            {% if anuncio.text %}
+                <p><strong>Descripción:</strong> {{ anuncio.text }}</p>
+            {% endif %}
+            
+            <div style="margin-top: 15px;">
+                <a href="{% url 'detalle_anuncio' anuncio.id %}" style="background-color: #007bff; color: white; padding: 8px 15px; text-decoration: none; border-radius: 3px;">
+                    Ver detalle
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="margin-top: 20px; color: #666;">No hay anuncios disponibles en este momento.</p>
+{% endif %}
+{% endblock %}

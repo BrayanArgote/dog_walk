@@ -1,0 +1,28 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Cancelar Paseo{% endblock %}
+
+{% block contenido %}
+<h1>Confirmar Cancelación</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ paseo.ad.pet.name }}</p>
+    <p><strong>Fecha:</strong> {{ paseo.ad.date }}</p>
+    <p><strong>Estado actual:</strong> {{ paseo.get_status_display }}</p>
+</div>
+
+<p style="color: #dc3545; font-weight: bold;">¿Estás seguro de que deseas cancelar este paseo?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #dc3545;">Sí, cancelar paseo</button>
+</form>
+
+<div class="links">
+    {% if request.session.user_role == 'walker' %}
+        <a href="{% url 'mis_paseos' %}">Volver</a>
+    {% else %}
+        <a href="{% url 'paseos_propietario' %}">Volver</a>
+    {% endif %}
+</div>
+{% endblock %}

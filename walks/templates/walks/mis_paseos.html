@@ -1,0 +1,74 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Mis Paseos{% endblock %}
+
+{% block contenido %}
+<h1>Mis Paseos</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'home' %}" style="color: #007bff; text-decoration: none;">
+        Volver al inicio
+    </a>
+</div>
+
+{% if paseos %}
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f8f9fa;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Mascota</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Fecha</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Propietario</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Dirección</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Estado</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Calificación</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paseo in paseos %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ paseo.ad.pet.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ paseo.ad.date }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <strong>{{ paseo.ad.pet.owner.first_name }} {{ paseo.ad.pet.owner.last_name }}</strong><br>
+                    <small style="color: #666;"> {{ paseo.ad.pet.owner.phone }}</small>
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {{ paseo.ad.pet.owner.address }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if paseo.status == 'pending' %}
+                        <span style="color: #ffc107;">Pendiente</span>
+                    {% elif paseo.status == 'in_progress' %}
+                        <span style="color: #17a2b8;">En progreso</span>
+                    {% elif paseo.status == 'done' %}
+                        <span style="color: #28a745;">Finalizado</span>
+                    {% else %}
+                        <span style="color: #dc3545;">Cancelado</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if paseo.rating %}
+                        {{ paseo.rating }} 
+                    {% else %}
+                        Sin calificar
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if paseo.status == 'pending' %}
+                        <a href="{% url 'iniciar_paseo' paseo.id %}" style="color: #28a745; margin-right: 10px;">Iniciar</a>
+                        <a href="{% url 'cancelar_paseo' paseo.id %}" style="color: #dc3545;">Cancelar</a>
+                    {% elif paseo.status == 'in_progress' %}
+                        <a href="{% url 'finalizar_paseo' paseo.id %}" style="color: #007bff;">Finalizar</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="margin-top: 20px; color: #666;">No tienes paseos asignados aún.</p>
+{% endif %}
+{% endblock %}

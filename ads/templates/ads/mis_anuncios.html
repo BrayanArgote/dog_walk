@@ -1,0 +1,57 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Mis Anuncios{% endblock %}
+
+{% block contenido %}
+<h1>Mis Anuncios</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'crear_anuncio' %}" style="background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 3px;">
+        Crear nuevo anuncio
+    </a>
+    <a href="{% url 'home' %}" style="margin-left: 10px; color: #007bff; text-decoration: none;">
+        Volver al inicio
+    </a>
+</div>
+
+{% if anuncios %}
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f8f9fa;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Mascota</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Fecha</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Hora</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Lugar</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Estado</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for anuncio in anuncios %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ anuncio.pet.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ anuncio.date }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ anuncio.time }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ anuncio.place }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if anuncio.status == 'available' %}
+                        <span style="color: #28a745;">Disponible</span>
+                    {% else %}
+                        <span style="color: #dc3545;">Cerrado</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <a href="{% url 'detalle_anuncio' anuncio.id %}" style="color: #007bff; margin-right: 10px;">Ver</a>
+                    {% if anuncio.status == 'available' %}
+                        <a href="{% url 'editar_anuncio' anuncio.id %}" style="color: #007bff; margin-right: 10px;">Editar</a>
+                        <a href="{% url 'cerrar_anuncio' anuncio.id %}" style="color: #dc3545;">Cerrar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="margin-top: 20px; color: #666;">No tienes anuncios creados aún.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Detalle del Anuncio{% endblock %}
+
+{% block contenido %}
+<h1>Detalle del Anuncio</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h2>{{ anuncio.pet.name }} ({{ anuncio.pet.type }})</h2>
+    
+    <p><strong>Fecha del paseo:</strong> {{ anuncio.date }}</p>
+    <p><strong>Hora:</strong> {{ anuncio.time }}</p>
+    <p><strong>Duración:</strong> {{ anuncio.duration }} minutos</p>
+    <p><strong>Lugar:</strong> {{ anuncio.place }}</p>
+    <p><strong>Estado:</strong> 
+        {% if anuncio.status == 'available' %}
+            <span style="color: #28a745;">Disponible</span>
+        {% else %}
+            <span style="color: #dc3545;">No disponible</span>
+        {% endif %}
+    </p>
+    
+    {% if anuncio.text %}
+        <p><strong>Descripción:</strong></p>
+        <p>{{ anuncio.text }}</p>
+    {% endif %}
+    
+    <hr style="margin: 20px 0;">
+    
+    <h3>Información del Propietario</h3>
+    
+    {% if mostrar_contacto %}
+        <p><strong>Nombre:</strong> {{ anuncio.pet.owner.first_name }} {{ anuncio.pet.owner.last_name }}</p>
+        <p><strong>Teléfono:</strong> {{ anuncio.pet.owner.phone }}</p>
+        <p><strong>Dirección:</strong> {{ anuncio.pet.owner.address }}</p>
+    {% else %}
+        <p style="color: #666; font-style: italic;">
+            Los datos de contacto del propietario se mostrarán cuando acepte tu solicitud.
+        </p>
+    {% endif %}
+    
+    {% if anuncio.pet.notes %}
+        <hr style="margin: 20px 0;">
+        <h3>Notas sobre la mascota</h3>
+        <p>{{ anuncio.pet.notes }}</p>
+    {% endif %}
+</div>
+
+{% if request.session.user_role == 'walker' and anuncio.status == 'available' %}
+    <div style="margin-top: 20px;">
+        <a href="{% url 'enviar_solicitud' anuncio.id %}" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 3px; display: inline-block;">
+            Enviar Solicitud
+        </a>
+    </div>
+{% endif %}
+
+<div class="links">
+    {% if request.session.user_role == 'walker' %}
+        <a href="{% url 'listar_anuncios_disponibles' %}">Volver a anuncios</a>
+    {% else %}
+        <a href="{% url 'listar_mis_anuncios' %}">Volver a mis anuncios</a>
+    {% endif %}
+</div>
+{% endblock %}

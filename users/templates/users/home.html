@@ -15,15 +15,16 @@
             <h3>Panel de Propietario</h3>
             <ul>
                 <li><a href="{% url 'listar_mascotas' %}">Mis mascotas</a></li>
-                <li><a href="#">Mis anuncios</a></li>
-                <li><a href="#">Ver solicitudes</a></li>
+                <li><a href="{% url 'listar_mis_anuncios' %}">Mis anuncios</a></li>
+                <li><a href="{% url 'solicitudes_recibidas' %}">Ver solicitudes</a></li>
+                <li><a href="{% url 'paseos_propietario' %}">Mis paseos</a></li>
             </ul>
         {% elif request.session.user_role == 'walker' %}
             <h3>Panel de Paseador</h3>
             <ul>
-                <li><a href="#">Ver anuncios disponibles</a></li>
-                <li><a href="#">Mis solicitudes</a></li>
-                <li><a href="#">Mis paseos</a></li>
+                <li><a href="{% url 'listar_anuncios_disponibles' %}">Ver anuncios disponibles</a></li>
+                <li><a href="{% url 'mis_solicitudes' %}">Mis solicitudes</a></li>
+                <li><a href="{% url 'mis_paseos' %}">Mis paseos</a></li>
             </ul>
         {% endif %}
     </div>

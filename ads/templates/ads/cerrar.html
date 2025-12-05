@@ -1,0 +1,27 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Cerrar Anuncio{% endblock %}
+
+{% block contenido %}
+<h1>Confirmar Cierre de Anuncio</h1>
+
+<p style="margin: 20px 0;">¿Estás seguro de que deseas cerrar este anuncio?</p>
+
+<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ anuncio.pet.name }}</p>
+    <p><strong>Fecha:</strong> {{ anuncio.date }}</p>
+    <p><strong>Hora:</strong> {{ anuncio.time }}</p>
+    <p><strong>Lugar:</strong> {{ anuncio.place }}</p>
+</div>
+
+<p style="color: #dc3545; font-weight: bold;">El anuncio dejará de aparecer para los paseadores.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #dc3545;">Sí, cerrar anuncio</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'listar_mis_anuncios' %}">Cancelar</a>
+</div>
+{% endblock %}

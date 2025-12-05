@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Rechazar Solicitud{% endblock %}
+
+{% block contenido %}
+<h1>Confirmar Rechazo</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ solicitud.ad.pet.name }}</p>
+    <p><strong>Paseador:</strong> {{ solicitud.walker.first_name }} {{ solicitud.walker.last_name }}</p>
+    <p><strong>Fecha:</strong> {{ solicitud.ad.date }}</p>
+</div>
+
+<p>¿Deseas rechazar esta solicitud?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #dc3545;">Sí, rechazar solicitud</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'solicitudes_recibidas' %}">Cancelar</a>
+</div>
+{% endblock %}

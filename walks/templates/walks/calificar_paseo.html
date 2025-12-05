@@ -1,0 +1,33 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Calificar Paseo{% endblock %}
+
+{% block contenido %}
+<h1>Calificar Paseo</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ paseo.ad.pet.name }}</p>
+    <p><strong>Paseador:</strong> {{ paseo.walker.first_name }} {{ paseo.walker.last_name }}</p>
+    <p><strong>Fecha:</strong> {{ paseo.ad.date }}</p>
+    <p><strong>Inicio:</strong> {{ paseo.start_time }}</p>
+    <p><strong>Fin:</strong> {{ paseo.end_time }}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+            <span style="color: red; font-size: 12px;">{{ field.errors }}</span>
+        {% endif %}
+    {% endfor %}
+    
+    <button type="submit">Enviar Calificación</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'paseos_propietario' %}">Cancelar</a>
+</div>
+{% endblock %}

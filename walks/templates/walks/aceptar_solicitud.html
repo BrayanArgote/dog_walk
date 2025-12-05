@@ -1,0 +1,27 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Aceptar Solicitud{% endblock %}
+
+{% block contenido %}
+<h1>Confirmar Aceptación</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <p><strong>Mascota:</strong> {{ solicitud.ad.pet.name }}</p>
+    <p><strong>Paseador:</strong> {{ solicitud.walker.first_name }} {{ solicitud.walker.last_name }}</p>
+    <p><strong>Teléfono:</strong> {{ solicitud.walker.phone }}</p>
+    <p><strong>Fecha:</strong> {{ solicitud.ad.date }} a las {{ solicitud.ad.time }}</p>
+    <p><strong>Lugar:</strong> {{ solicitud.ad.place }}</p>
+</div>
+
+<p>¿Deseas aceptar esta solicitud?</p>
+<p style="color: #28a745; font-weight: bold;">Se creará un paseo y el anuncio se cerrará automáticamente.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="background-color: #28a745;">Sí, aceptar solicitud</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'solicitudes_recibidas' %}">Cancelar</a>
+</div>
+{% endblock %}

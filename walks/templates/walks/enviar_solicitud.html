@@ -1,0 +1,26 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Enviar Solicitud{% endblock %}
+
+{% block contenido %}
+<h1>Enviar Solicitud de Paseo</h1>
+
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">
+    <h3>{{ anuncio.pet.name }} ({{ anuncio.pet.type }})</h3>
+    <p><strong>Fecha:</strong> {{ anuncio.date }} a las {{ anuncio.time }}</p>
+    <p><strong>Duración:</strong> {{ anuncio.duration }} minutos</p>
+    <p><strong>Lugar:</strong> {{ anuncio.place }}</p>
+    <p><strong>Propietario:</strong> {{ anuncio.pet.owner.first_name }} {{ anuncio.pet.owner.last_name }}</p>
+</div>
+
+<p>¿Deseas enviar una solicitud para pasear a esta mascota?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Enviar Solicitud</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'detalle_anuncio' anuncio.id %}">Cancelar</a>
+</div>
+{% endblock %}

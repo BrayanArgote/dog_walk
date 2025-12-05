@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Editar Anuncio{% endblock %}
+
+{% block contenido %}
+<h1>Editar Anuncio</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+            <span style="color: red; font-size: 12px;">{{ field.errors }}</span>
+        {% endif %}
+    {% endfor %}
+    
+    <button type="submit">Actualizar</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'listar_mis_anuncios' %}">Cancelar</a>
+</div>
+{% endblock %}
