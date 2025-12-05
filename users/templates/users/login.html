@@ -1,25 +1,43 @@
 {% extends 'users/base.html' %}
 
-{% block titulo %}Login - Dog Walk{% endblock %}
+{% block titulo %}Iniciar Sesión - Dog Walk{% endblock %}
+
+{% block nav_links %}
+<!-- Navegación con "Iniciar sesión" destacado -->
+<a href="{% url 'landing' %}">Inicio</a>
+<a href="{% url 'login' %}" class="destacado">Iniciar sesión</a>
+<a href="{% url 'register' %}">Registrarse</a>
+{% endblock %}
 
 {% block contenido %}
-<h1>Iniciar Sesión</h1>
+<div class="container">
+    <h1>Iniciar Sesión</h1>
 
-<form method="post">
-    {% csrf_token %}
-    
-    {% for field in form %}
-        <label>{{ field.label }}</label>
-        {{ field }}
-        {% if field.errors %}
-            <span style="color: red; font-size: 12px;">{{ field.errors }}</span>
-        {% endif %}
-    {% endfor %}
-    
-    <button type="submit">Ingresar</button>
-</form>
+    <!-- Mensajes del sistema dentro del formulario -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-<div class="links">
-    <p>¿No tienes cuenta? <a href="{% url 'register' %}">Registrarse</a></p>
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <span class="error-text">{{ field.errors }}</span>
+            {% endif %}
+        {% endfor %}
+        
+        <button type="submit">Ingresar</button>
+    </form>
+
+    <div class="links">
+        <p>¿No tienes cuenta? <a href="{% url 'register' %}">Registrarse</a></p>
+    </div>
 </div>
 {% endblock %}

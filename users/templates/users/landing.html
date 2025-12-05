@@ -1,0 +1,20 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block titulo %}Inicio - Dog Walk{% endblock %}
+
+{% block contenido %}
+
+<section class="landing">
+    <img src="{% static 'images/landing_image.png' %}" alt="Dog Walk" class="landing-image">
+    
+    <h1>Bienvenido a Dog Walk</h1>
+    <p>
+        La plataforma que conecta a dueños de mascotas con paseadores confiables.
+        <br><br>
+        ¿Necesitas que paseen a tu perro? ¿Quieres ganar dinero paseando mascotas?
+        <br>
+        ¡Estás en el lugar correcto!
+    </p>
+</section>
+{% endblock %}

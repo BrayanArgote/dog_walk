@@ -52,3 +52,6 @@ def logout_view(request):
 def home(request):
     """Vista de página principal"""
     return render(request, 'users/home.html')
+def landing(request):
+    """Vista de página de inicio pública (para todos los usuarios)"""
+    return render(request, "users/landing.html")

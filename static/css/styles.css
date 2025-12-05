@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E8E8E8; 
+    color: #2F5F5F; 
+    line-height: 1.6;
+}
+
+/* header */
+header {
+    background-color: #7BC4C4; 
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* logo  */
+.logo img {
+    height: 45px; 
+    width: auto;
+    display: block;
+}
+
+/* navegacion del header */
+nav {
+    display: flex;
+    gap: 25px;
+    align-items: center; 
+}
+
+nav a {
+    color: #2F5F5F; 
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px; 
+    border-radius: 4px; 
+}
+
+nav a.destacado {
+    background-color: #C2E4E4; 
+}
+
+/* main */
+main {
+    margin-top: 70px; 
+    min-height: calc(100vh - 170px); 
+}
+
+.container {
+    max-width: 500px;
+    margin: 100px auto 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.landing {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    margin: 100px auto 40px auto;
+    max-width: 900px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.landing-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.landing h1 {
+    font-size: 36px;
+    color: #2F5F5F; 
+    margin-bottom: 20px;
+}
+
+.landing p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* footer */
+footer {
+    background-color: #7BC4C4; 
+    color: #2F5F5F;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* mensajes */
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.messages li {
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* formularios */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #7BC4C4;
+}
+
+/*botones */
+button, .btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #7BC4C4; 
+    color: #2F5F5F; 
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/* titulos */
+h1 {
+    color: #2F5F5F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    color: #2F5F5F; 
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* enlaces */
+a {
+    color: #2F5F5F; 
+    text-decoration: none;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* listas */
+ul {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #7BC4C4;
+    color: #2F5F5F;
+    font-weight: bold;
+}
+
+/* Errores en formularios */
+.error-text {
+    display: block;
+    color: #721c24;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
