@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Login - Dog Walk{% endblock %}
+
+{% block contenido %}
+<h1>Iniciar Sesión</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+            <span style="color: red; font-size: 12px;">{{ field.errors }}</span>
+        {% endif %}
+    {% endfor %}
+    
+    <button type="submit">Ingresar</button>
+</form>
+
+<div class="links">
+    <p>¿No tienes cuenta? <a href="{% url 'register' %}">Registrarse</a></p>
+</div>
+{% endblock %}

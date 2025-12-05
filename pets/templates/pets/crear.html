@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Agregar Mascota{% endblock %}
+
+{% block contenido %}
+<h1>Agregar Nueva Mascota</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <label>{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+            <span style="color: red; font-size: 12px;">{{ field.errors }}</span>
+        {% endif %}
+    {% endfor %}
+    
+    <button type="submit">Guardar Mascota</button>
+</form>
+
+<div class="links">
+    <a href="{% url 'listar_mascotas' %}">Cancelar</a>
+</div>
+{% endblock %}

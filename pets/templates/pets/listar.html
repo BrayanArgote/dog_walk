@@ -1,0 +1,44 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Mis Mascotas{% endblock %}
+
+{% block contenido %}
+<h1>Mis Mascotas</h1>
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'crear_mascota' %}" style="background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 3px;">
+        Agregar nueva mascota
+    </a>
+    <a href="{% url 'home' %}" style="margin-left: 10px; color: #007bff; text-decoration: none;">
+        Volver al inicio
+    </a>
+</div>
+
+{% if mascotas %}
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f8f9fa;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Nombre</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Tipo</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Notas</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mascota in mascotas %}
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ mascota.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ mascota.type }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">{{ mascota.notes|default:"Sin notas" }}</td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    <a href="{% url 'editar_mascota' mascota.id %}" style="color: #007bff; margin-right: 10px;">Editar</a>
+                    <a href="{% url 'eliminar_mascota' mascota.id %}" style="color: #dc3545;">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p style="margin-top: 20px; color: #666;">No tienes mascotas registradas aún.</p>
+{% endif %}
+{% endblock %}

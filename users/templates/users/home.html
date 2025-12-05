@@ -1,0 +1,41 @@
+{% extends 'users/base.html' %}
+
+{% block titulo %}Inicio - Dog Walk{% endblock %}
+
+{% block contenido %}
+<h1>Bienvenido a Dog Walk</h1>
+
+<!-- Mostrar info del usuario logueado -->
+{% if request.session.user_id %}
+    <p>Has iniciado sesión correctamente</p>
+    <p><strong>Rol:</strong> {{ request.session.user_role }}</p>
+    
+    <div style="margin-top: 20px;">
+        {% if request.session.user_role == 'owner' %}
+            <h3>Panel de Propietario</h3>
+            <ul>
+                <li><a href="{% url 'listar_mascotas' %}">Mis mascotas</a></li>
+                <li><a href="#">Mis anuncios</a></li>
+                <li><a href="#">Ver solicitudes</a></li>
+            </ul>
+        {% elif request.session.user_role == 'walker' %}
+            <h3>Panel de Paseador</h3>
+            <ul>
+                <li><a href="#">Ver anuncios disponibles</a></li>
+                <li><a href="#">Mis solicitudes</a></li>
+                <li><a href="#">Mis paseos</a></li>
+            </ul>
+        {% endif %}
+    </div>
+    
+    <div class="links">
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </div>
+{% else %}
+    <p>No has iniciado sesión</p>
+    <div class="links">
+        <a href="{% url 'login' %}">Iniciar sesión</a> | 
+        <a href="{% url 'register' %}">Registrarse</a>
+    </div>
+{% endif %}
+{% endblock %}
